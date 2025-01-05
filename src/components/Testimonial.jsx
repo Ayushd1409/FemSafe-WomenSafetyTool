@@ -4,7 +4,7 @@ function Testimonial() {
   return (
     <div>
         <section className="my-16 p-20">
-          <h3 className="text-xl font-bold text-center mb-6">OUR TESTIMONIALS</h3>
+          <h3 className="text-2xl font-bold text-center mb-10">OUR TESTIMONIALS</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {["Card Title 1", "Card Title 2", "Card Title 3", "Card Title 4"].map(
               (title, index) => (

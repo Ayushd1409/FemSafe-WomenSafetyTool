@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
+import { UserData } from "../context/UserContext";
 
 function Login() {
+    const {isAuth,isAdmin}=UserData();
+  const navigate = useNavigate()
+  const{  loginUser } = UserData()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+
+  const submitHandler=async(e)=>{
+    e.preventDefault()
+    await loginUser(email, password, navigate);
+  }
   return (
     <>
-      <Navbar />
+      <Navbar isAuth={isAuth} isAdmin={isAdmin}/>
       <div>
         <div className="hero bg-gray-900 min-h-screen">
           <div className="hero-content flex-col lg:flex-col">
@@ -13,7 +26,7 @@ function Login() {
               <h1 className="text-4xl font-bold text-slate-50 mb-10">Login</h1>
             </div>
             <div className="card bg-base-100 w-96 max-w-sm shrink-0 shadow-2xl drop-shadow-2xl">
-              <form className="card-body">
+              <form onSubmit={submitHandler} className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Email</span>
@@ -21,6 +34,8 @@ function Login() {
                   <input
                     type="email"
                     placeholder="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="input input-bordered"
                     required
                   />
@@ -32,6 +47,8 @@ function Login() {
                   <input
                     type="password"
                     placeholder="password"
+                    value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                     className="input input-bordered"
                     required
                   />
@@ -48,7 +65,7 @@ function Login() {
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary bg-gray-800 text-slate-50 hover:bg-gray-950">
+                  <button type="submit" className="btn btn-primary bg-gray-800 text-slate-50 hover:bg-gray-950">
                     Login
                   </button>
                 </div>

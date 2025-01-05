@@ -26,15 +26,9 @@ function Workflow() {
                 <div className="timeline-start mb-10 md:text-end">
                   <time className="font-mono italic">HOME</time>
                   <div className="text-lg font-black">
-                    First Macintosh computer
+                  Welcome to FemSafe
                   </div>
-                  The Apple Macintosh—later rebranded as the Macintosh 128K—is
-                  the original Apple Macintosh personal computer. It played a
-                  pivotal role in establishing desktop publishing as a general
-                  office function. The motherboard, a 9 in (23 cm) CRT monitor,
-                  and a floppy drive were housed in a beige case with integrated
-                  carrying handle; it came with a keyboard and single-button
-                  mouse.
+                  The home page serves as the entry point, introducing users to FemSafe's mission and purpose. It provides a welcoming interface with intuitive navigation options, ensuring users can easily access the services they need.
                 </div>
                 <hr />
               </li>
@@ -56,11 +50,8 @@ function Workflow() {
                 </div>
                 <div className="timeline-end mb-10">
                   <time className="font-mono italic">LOG IN</time>
-                  <div className="text-lg font-black">iMac</div>
-                  iMac is a family of all-in-one Mac desktop computers designed
-                  and built by Apple Inc. It has been the primary part of
-                  Apple's consumer desktop offerings since its debut in August
-                  1998, and has evolved through seven distinct forms
+                  <div className="text-lg font-black">Access Your Account</div>
+                  Users can log in to their accounts securely to manage their reports and access personalized features. New users can easily sign up, while returning users can log in using their credentials.
                 </div>
                 <hr />
               </li>
@@ -82,15 +73,8 @@ function Workflow() {
                 </div>
                 <div className="timeline-start mb-10 md:text-end">
                   <time className="font-mono italic">FILE A REPORT</time>
-                  <div className="text-lg font-black">iPod</div>
-                  The iPod is a discontinued series of portable media players
-                  and multi-purpose mobile devices designed and marketed by
-                  Apple Inc. The first version was released on October 23, 2001,
-                  about 8+1⁄2 months after the Macintosh version of iTunes was
-                  released. Apple sold an estimated 450 million iPod products as
-                  of 2022. Apple discontinued the iPod product line on May 10,
-                  2022. At over 20 years, the iPod brand is the oldest to be
-                  discontinued by Apple
+                  <div className="text-lg font-black">Report an Incident & Provide Details</div>
+                  Users can select the type of incident they want to report, such as harassment, theft, or domestic violence. This step ensures proper categorization of the case.Users can choose to file the report anonymously or provide their contact details for follow-ups, ensuring their comfort and safety.
                 </div>
                 <hr />
               </li>
@@ -112,15 +96,8 @@ function Workflow() {
                 </div>
                 <div className="timeline-end mb-10">
                   <time className="font-mono italic"> GET NOTIFY</time>
-                  <div className="text-lg font-black">iPhone</div>
-                  iPhone is a line of smartphones produced by Apple Inc. that
-                  use Apple's own iOS mobile operating system. The
-                  first-generation iPhone was announced by then-Apple CEO Steve
-                  Jobs on January 9, 2007. Since then, Apple has annually
-                  released new iPhone models and iOS updates. As of November 1,
-                  2018, more than 2.2 billion iPhones had been sold. As of 2022,
-                  the iPhone accounts for 15.6% of global smartphone market
-                  share
+                  <div className="text-lg font-black">Acknowledgment & Updates</div>
+                  Notifications keep users informed about the progress of their case, from initial review to further actions
                 </div>
                 <hr />
               </li>
@@ -141,12 +118,9 @@ function Workflow() {
                   </svg>
                 </div>
                 <div className="timeline-start mb-10 md:text-end">
-                  <time className="font-mono italic">ISSUE RESOLVED</time>
-                  <div className="text-lg font-black">Apple Watch</div>
-                  The Apple Watch is a line of smartwatches produced by Apple
-                  Inc. It incorporates fitness tracking, health-oriented
-                  capabilities, and wireless telecommunication, and integrates
-                  with iOS and other Apple products and services
+                  <time className="font-mono italic">ACTION TAKEN</time>
+                  <div className="text-lg font-black">Case Progress</div>
+                  Users are informed about the status of their report, whether it's under review, forwarded to authorities, or resolved, helping FemSafe improve and provide better support.
                 </div>
               </li>
             </ul>

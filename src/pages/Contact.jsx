@@ -1,25 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import { UserData } from "../context/UserContext";
+import axios from "axios";
+import toast,{Toaster} from "react-hot-toast";
 
 function Contact() {
+  const { isAuth } = UserData();
   const [date, setDate] = useState("");
+  const [name, setName] = useState("");
+  const [rollNumber, setRollNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [witness, setWitness] = useState("");
+  const [incidentType, setIncidentType] = useState("");
+  const [action, setAction] = useState("");
+  const [frequency, setFrequency] = useState("");
+  const [description, setDescription] = useState("");
+  const [perpetratorDetails, setPerpetratorDetails] = useState("");
+  const [confidentiality, setConfidentiality] = useState(true); // Default checked
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const reportData = {
+      name,
+      rollNumber,
+      email,
+      dateOfIncident: new Date(date),
+      location,
+      witnessName: witness,
+      typeOfIncident: incidentType,
+      desiredAction: action, 
+      frequency,
+      incidentDescription: description,
+      perpetratorDetails,
+      confidentiality,
+    };
+  
+    try {
+      const response = await axios.post("http://localhost:5000/api/submit",reportData);
+  
+      // If the response is successful
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Report submitted successfully!");
+        console.log(response.data); // You can handle success here
+      } else {
+        // Handle unexpected successful responses
+        throw new Error("Unexpected response status: " + response.status);
+      }
+    } catch (error) {
+      console.error("Error submitting the report:", error);
+      toast.error("Error submitting the report!");
+    }
+  };
+
   return (
     <>
-      <Navbar />
+      <Navbar isAuth={isAuth} />
 
       <div>
         <div className="min-h-screen py-20 bg-gray-900 ">
-          <div className="container mx-auto max-w-5xl">
-            <div className=" bg-slate-50 rounded-xl mx-auto shadow-lg overflow-hidden">
-              <div className="w-full  flex flex-col items-center justify-end p-5 bg-no-repeat bg-cover bg-center"></div>
+          <div className="container mx-auto max-w-5xl mt-14">
+            <div className="bg-slate-50 rounded-xl mx-auto shadow-lg overflow-hidden">
+              <div className="w-full flex flex-col items-center justify-end p-5 bg-no-repeat bg-cover bg-center"></div>
               <div className="w-full px-10">
-                <h2 className="text-4xl mb-4 text-center font-semibold">
-                  File a Report
-                </h2>
+                <h2 className="text-4xl mb-4 text-center font-semibold">File a Report</h2>
                 <p className="mb-4 text-center">Personal Information</p>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="mt-3">
                     <label className="form-control w-full">
                       <div className="label">
@@ -28,37 +77,43 @@ function Contact() {
                       <input
                         type="text"
                         placeholder="Type here"
-                        className="input input-bordered w-full "
+                        className="input input-bordered w-full"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </label>
                   </div>
                   <div className="mt-3">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full">
                       <div className="label">
                         <span className="label-text">Roll Number</span>
                       </div>
                       <input
                         type="number"
                         placeholder="Type here"
-                        className="input input-bordered w-full "
+                        className="input input-bordered w-full"
+                        value={rollNumber}
+                        onChange={(e) => setRollNumber(e.target.value)}
                       />
                     </label>
                   </div>
                   <div className="mt-3">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full">
                       <div className="label">
-                        <span className="label-text">Personal Email</span>{" "}
+                        <span className="label-text">Personal Email</span>
                       </div>
                       <input
                         type="email"
                         placeholder="Type here"
-                        className="input input-bordered w-full "
+                        className="input input-bordered w-full"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </label>
                   </div>
-                  <p className="mt-5 text-center">Incident Information </p>
+                  <p className="mt-5 text-center">Incident Information</p>
                   <div className="mt-3">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full">
                       <div className="label">
                         <span className="label-text">Date of Incident</span>
                       </div>
@@ -67,65 +122,72 @@ function Contact() {
                           type="date"
                           value={date}
                           onChange={(e) => setDate(e.target.value)}
-                          className="input input-bordered w-full "
+                          className="input input-bordered w-full"
                         />
-                        <p className="mt-3">Selected Date: {date}</p>
                       </div>
                     </label>
                   </div>
 
                   <div className="mt-3">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full">
                       <div className="label">
-                        <span className="label-text">Location of Incident</span>{" "}
+                        <span className="label-text">Location of Incident</span>
                       </div>
                       <input
                         type="text"
                         placeholder="Type here"
-                        className="input input-bordered w-full "
+                        className="input input-bordered w-full"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
                       />
                     </label>
                   </div>
                   <div className="mt-5">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full">
                       <div className="label">
-                        <span className="label-text">
-                          Name of Witness - if any
-                        </span>{" "}
+                        <span className="label-text">Name of Witness - if any</span>
                       </div>
                       <input
                         type="text"
                         placeholder="Type here"
-                        className="input input-bordered w-full "
+                        className="input input-bordered w-full"
+                        value={witness}
+                        onChange={(e) => setWitness(e.target.value)}
                       />
                     </label>
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-4 pt-6">
-                    <select className="select select-bordered w-full max-w-xs p-3 rounded-lg shadow-md">
-                      <option disabled selected>
-                        Type of Incident
-                      </option>
+                    <select
+                      className="select select-bordered w-full max-w-xs p-3 rounded-lg shadow-md"
+                      value={incidentType}
+                      onChange={(e) => setIncidentType(e.target.value)}
+                    >
+                      <option disabled selected>Type of Incident</option>
                       <option>Ragging</option>
                       <option>Harassment</option>
                       <option>Bullying</option>
                       <option>Physical Abuse</option>
                     </select>
 
-                    <select className="select select-bordered w-full max-w-xs p-3 rounded-lg shadow-md">
-                      <option disabled selected>
-                        Desired Action (if any)
-                      </option>
+                    <select
+                      className="select select-bordered w-full max-w-xs p-3 rounded-lg shadow-md"
+                      value={action}
+                      onChange={(e) => setAction(e.target.value)}
+                    >
+                      <option disabled selected>Desired Action (if any)</option>
                       <option>Investigation</option>
                       <option>Counseling</option>
                       <option>Disciplinary Action</option>
                       <option>Mediation</option>
                     </select>
 
-                    <select className="select select-bordered w-full max-w-xs p-3 rounded-lg shadow-md">
-                      <option disabled selected>
-                        Frequency (how often?)
-                      </option>
+                    <select
+                      className="select select-bordered w-full max-w-xs p-3 rounded-lg shadow-md"
+                      value={frequency}
+                      onChange={(e) => setFrequency(e.target.value)}
+                    >
+                      <option disabled selected>Frequency (how often?)</option>
                       <option>First time</option>
                       <option>Daily</option>
                       <option>Weekly</option>
@@ -134,29 +196,29 @@ function Contact() {
                   </div>
 
                   <div className="mt-3">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full">
                       <div className="label">
-                        <span className="label-text">
-                          Description of the Incident
-                        </span>{" "}
+                        <span className="label-text">Description of the Incident</span>
                       </div>
                       <textarea
                         placeholder="Type here"
-                        className="textarea textarea-bordered textarea-lg text-base w-full "
+                        className="textarea textarea-bordered textarea-lg text-base w-full"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                       ></textarea>
                     </label>
                   </div>
 
                   <div className="mt-3">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full">
                       <div className="label">
-                        <span className="label-text">
-                          Details of the Perpetrator
-                        </span>{" "}
+                        <span className="label-text">Details of the Perpetrator</span>
                       </div>
                       <textarea
                         placeholder="Type here"
-                        className="textarea textarea-bordered textarea-lg text-base w-full "
+                        className="textarea textarea-bordered textarea-lg text-base w-full"
+                        value={perpetratorDetails}
+                        onChange={(e) => setPerpetratorDetails(e.target.value)}
                       ></textarea>
                     </label>
                   </div>
@@ -164,18 +226,18 @@ function Contact() {
                   <div className="form-control mt-4">
                     <label className="label cursor-pointer">
                       <span className="label-text text-base">
-                        Confidentiality Preference - Do you allow your name to
-                        be disclosed in an investigation?
+                        Confidentiality Preference - Do you allow your name to be disclosed in an investigation?
                       </span>
                       <input
                         type="checkbox"
-                        defaultChecked
+                        checked={confidentiality}
+                        onChange={() => setConfidentiality(!confidentiality)}
                         className="checkbox"
                       />
                     </label>
                   </div>
 
-                  <span className="">
+                  <span>
                     I accept the{" "}
                     <a href="#" className="text-gray-950 font-semibold">
                       Terms of Use
@@ -185,9 +247,9 @@ function Contact() {
                       Privacy Policy
                     </a>
                   </span>
-                  <div></div>
+
                   <div className="mt-5 mb-8">
-                    <button className="w-full bg-gray-800 rounded-lg hover:bg-gray-950 cursor-pointer py-3 text-center text-white">
+                    <button type="submit" className="w-full bg-gray-800 rounded-lg hover:bg-gray-950 cursor-pointer py-3 text-center text-white">
                       Submit
                     </button>
                   </div>
@@ -197,7 +259,7 @@ function Contact() {
           </div>
         </div>
       </div>
-
+      <Toaster/>
       <Footer />
     </>
   );
