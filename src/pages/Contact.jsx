@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { UserData } from "../context/UserContext";
 import axios from "axios";
-import toast,{Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 function Contact() {
   const { isAuth } = UserData();
@@ -18,12 +18,11 @@ function Contact() {
   const [frequency, setFrequency] = useState("");
   const [description, setDescription] = useState("");
   const [perpetratorDetails, setPerpetratorDetails] = useState("");
-  const [confidentiality, setConfidentiality] = useState(true); // Default checked
+  const [confidentiality, setConfidentiality] = useState(true);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const reportData = {
       name,
       rollNumber,
@@ -32,22 +31,20 @@ function Contact() {
       location,
       witnessName: witness,
       typeOfIncident: incidentType,
-      desiredAction: action, 
+      desiredAction: action,
       frequency,
       incidentDescription: description,
       perpetratorDetails,
       confidentiality,
     };
-  
+
     try {
-      const response = await axios.post("http://localhost:5000/api/submit",reportData);
-  
-      // If the response is successful
+      const response = await axios.post("http://localhost:5000/api/submit", reportData);
+
       if (response.status === 200 || response.status === 201) {
         toast.success("Report submitted successfully!");
-        console.log(response.data); // You can handle success here
+        console.log(response.data);
       } else {
-        // Handle unexpected successful responses
         throw new Error("Unexpected response status: " + response.status);
       }
     } catch (error) {
@@ -56,12 +53,33 @@ function Contact() {
     }
   };
 
+  // Voice to text logic
+  const startListening = (field) => {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      if (field === "description") {
+        setDescription(transcript);
+      } else if (field === "perpetratorDetails") {
+        setPerpetratorDetails(transcript);
+      }
+    };
+
+    recognition.onerror = (event) => {
+      toast.error("Speech recognition failed. Please try again.");
+      console.error(event.error);
+    };
+  };
+
   return (
     <>
       <Navbar isAuth={isAuth} />
 
       <div>
-        <div className="min-h-screen py-20 bg-gray-900 ">
+        <div className="min-h-screen py-20 bg-gray-900">
           <div className="container mx-auto max-w-5xl mt-14">
             <div className="bg-slate-50 rounded-xl mx-auto shadow-lg overflow-hidden">
               <div className="w-full flex flex-col items-center justify-end p-5 bg-no-repeat bg-cover bg-center"></div>
@@ -206,6 +224,13 @@ function Contact() {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                       ></textarea>
+                      <button
+                        type="button"
+                        onClick={() => startListening("description")}
+                        className="mt-2 btn btn-primary w-full text-white"
+                      >
+                        Start Voice Input
+                      </button>
                     </label>
                   </div>
 
@@ -220,6 +245,13 @@ function Contact() {
                         value={perpetratorDetails}
                         onChange={(e) => setPerpetratorDetails(e.target.value)}
                       ></textarea>
+                      <button
+                        type="button"
+                        onClick={() => startListening("perpetratorDetails")}
+                        className="mt-2 btn btn-primary w-full text-white"
+                      >
+                        Start Voice Input
+                      </button>
                     </label>
                   </div>
 
@@ -249,7 +281,10 @@ function Contact() {
                   </span>
 
                   <div className="mt-5 mb-8">
-                    <button type="submit" className="w-full bg-gray-800 rounded-lg hover:bg-gray-950 cursor-pointer py-3 text-center text-white">
+                    <button
+                      type="submit"
+                      className="w-full bg-gray-800 rounded-lg hover:bg-gray-950 cursor-pointer py-3 text-center text-white"
+                    >
                       Submit
                     </button>
                   </div>
@@ -259,7 +294,7 @@ function Contact() {
           </div>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
       <Footer />
     </>
   );

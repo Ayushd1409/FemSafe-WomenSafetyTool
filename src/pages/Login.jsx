@@ -5,20 +5,26 @@ import { useNavigate } from "react-router-dom";
 import { UserData } from "../context/UserContext";
 
 function Login() {
-    const {isAuth,isAdmin}=UserData();
-  const navigate = useNavigate()
-  const{  loginUser } = UserData()
+  const { isAuth, isAdmin } = UserData();
+  const navigate = useNavigate();
+  const { loginUser } = UserData();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-  const submitHandler=async(e)=>{
-    e.preventDefault()
+  const submitHandler = async (e) => {
+    e.preventDefault();
     await loginUser(email, password, navigate);
-  }
+  };
+
+  const handleTestUser = () => {
+    // Test user 
+    setEmail("jkklm@gmail.com");
+    setPassword("password");
+  };
+
   return (
     <>
-      <Navbar isAuth={isAuth} isAdmin={isAdmin}/>
+      <Navbar isAuth={isAuth} isAdmin={isAdmin} />
       <div>
         <div className="hero bg-gray-900 min-h-screen">
           <div className="hero-content flex-col lg:flex-col">
@@ -48,7 +54,7 @@ function Login() {
                     type="password"
                     placeholder="password"
                     value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="input input-bordered"
                     required
                   />
@@ -64,9 +70,19 @@ function Login() {
                     </a>
                   </label>
                 </div>
-                <div className="form-control mt-6">
-                  <button type="submit" className="btn btn-primary bg-gray-800 text-slate-50 hover:bg-gray-950">
+                <div className="form-control mt-6 space-y-4">
+                  <button
+                    type="submit"
+                    className="btn btn-primary bg-gray-800 text-slate-50 hover:bg-gray-950"
+                  >
                     Login
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleTestUser}
+                    className="btn btn-secondary bg-gray-700 text-slate-50 hover:bg-gray-800"
+                  >
+                    Login as Test User
                   </button>
                 </div>
               </form>

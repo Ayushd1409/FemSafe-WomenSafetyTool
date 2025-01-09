@@ -25,17 +25,17 @@ const {isAuth,isAdmin}=UserData();
               <a href="/" className="text-gray-800 hover:text-gray-500">Home</a>
               <a href="/about" className="text-gray-800 hover:text-gray-500">About</a>
               {isAdmin ? (
-            // Admin link (visible only to the admin)
+            
             <a href="/submit" className="text-gray-800 hover:text-gray-500">
               Submissions
             </a>
           ) : (
-            // User link (visible only to normal users)
+            
             <a href="/contact" className="text-gray-800 hover:text-gray-500">
               Report
             </a>
           )}
-              {/* <a href="/contact" className="text-gray-800 hover:text-gray-500">Report</a> */}
+              
               {isAuth ? (<Link to='/account'>
                             <a className="text-gray-800 hover:text-gray-500">
                               Account
@@ -74,13 +74,13 @@ const {isAuth,isAdmin}=UserData();
                               Login
                             </a>
                             </Link>)}
-              {/* <a href="/login" className="text-gray-800 hover:text-gray-500">Log in</a> */}
+              
             </div>
           )}
         </div>
 
         {/* About Section */}
-        <div className="min-h-screen bg-gray-900 text-white flex flex-col justify-center items-center p-5 pt-16">
+        <div className="min-h-screen bg-gray-900 text-white flex flex-col justify-center items-center p-5 pt-16 ">
           <motion.h1
             className="text-4xl sm:text-5xl font-bold mb-10 mt-20"
             initial={{ y: -50, opacity: 0 }}
@@ -90,7 +90,7 @@ const {isAuth,isAdmin}=UserData();
             About Us
           </motion.h1>
           <motion.p
-            className="max-w-2xl text-lg sm:text-xl text-center mb-20"
+            className="max-w-2xl text-lg sm:text-xl text-center mb-20 "
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -106,9 +106,37 @@ const {isAuth,isAdmin}=UserData();
             ensures that help is just a tap away.
 
             <p className="font-mono text-2xl mt-10">
-              "This is developed by Ayush Dewangan, Abhinav Sharma and Chetan Vishwakarma"
-            </p> <br /> 
+              "This is developed by Ayush Dewangan"
+            </p>  
           </motion.p>
+          <div className="flex space-x-8 mt-2">
+            <a
+              href="https://www.linkedin.com/in/ayush-dewangan-2721b1229/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center px-4 py-2 bg-white text-gray-900 rounded hover:bg-gray-100 hover:scale-110 transition"
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+                alt="LinkedIn Logo"
+                className="w-5 h-5 mr-2 "
+              />
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/Ayushd1409"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center px-4 py-2 bg-white text-gray-900 rounded hover:bg-gray-100 hover:scale-110 transition"
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                alt="GitHub Logo"
+                className="w-5 h-5 mr-2"
+              />
+              GitHub
+            </a>
+          </div>
         </div>
       </section>
 

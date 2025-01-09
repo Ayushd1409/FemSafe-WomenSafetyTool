@@ -4,8 +4,8 @@ function Workflow() {
   return (
     <div>
       <div>
-        <section className=" px-20 ">
-          {/* <h3 className="text-xl font-bold text-center mb-12">WORKFLOW</h3> */}
+        <section className=" sm:px-24 p-10">
+          
           <div>
             <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
               <li>

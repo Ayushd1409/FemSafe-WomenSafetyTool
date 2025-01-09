@@ -15,7 +15,7 @@ function Account({ user }) {
   const [reportProgress, setReportProgress] = useState("Report Submit");
 
   useEffect(() => {
-    const fetchedProgress = "Reviewed"; // Example progress (should come from the backend)
+    const fetchedProgress = "Reviewed"; 
     setReportProgress(fetchedProgress);
   }, []);
 
@@ -34,7 +34,7 @@ function Account({ user }) {
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row">
           <img
-            src="https://practicetestgeeks.com/wp-content/uploads/2021/10/id-card.png"
+            src="https://www.svgrepo.com/show/231264/user.svg"
             className="max-w-sm rounded-lg md:px-8 px-32"
           />
           <div className="px-6">

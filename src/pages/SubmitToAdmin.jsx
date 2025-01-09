@@ -5,20 +5,21 @@ import { UserData } from "../context/UserContext";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+
 function SubmitToAdmin() {
   const { isAuth, isAdmin } = UserData();
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch all reports
+  
   useEffect(() => {
     if (!isAdmin) return;
 
     const fetchReports = async () => {
       try {
-        console.log("Fetching reports..."); // Debug log
+        console.log("Fetching reports..."); 
         const response = await axios.get("http://localhost:5000/api/submit");
-        console.log(response.data); // Debug log for the response data
+        console.log(response.data); 
         setReports(response.data);
         setLoading(false);
       } catch (error) {
@@ -168,9 +169,17 @@ function SubmitToAdmin() {
                                   {report.confidentiality}
                                 </span>
                               </div>
+                              <div className="flex justify-between mt-2">
+                                <span className="font-medium text-gray-700">
+                                  Severity
+                                </span>
+                                <span className="text-gray-600">
+                                  Low
+                                </span>
+                              </div>
                             </div>
                           </div>
-                          {/* Add buttons for report status */}
+                          {/* buttons for report status */}
                           <div className="flex justify-between mt-4">
                             <button
                               className={`btn ${
@@ -179,7 +188,7 @@ function SubmitToAdmin() {
                                   : ""
                               }`}
                             >
-                              Report Submit{" "}
+                              Severity{" "}
                               <input
                                 type="checkbox"
                                 className="toggle toggle-info"

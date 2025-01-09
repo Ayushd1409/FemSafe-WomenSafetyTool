@@ -47,16 +47,16 @@ function Verify() {
                 <label className="label mt-8">
                   <a href="#" className="label-text-alt flex justify-between w-full">
                     
-                    {/* <Link to='/login'> */}
+                    
                       <span className="cursor-pointer underline text-gray-900 hover:text-gray-800">Back to Login</span>
-                    {/* </Link>    */}
+                    
                                    </a>
                 </label>
               </div>
               <div className="form-control">
                 <button  type="submit" className="btn bg-slate-950 text-white hover:bg-slate-900">
                     Verify
-                {/* disabled={btnLoading} */}
+               
                 {/* {btnLoading ? "Please Wait..." : "Verify"} */}
                 </button>
               </div>
